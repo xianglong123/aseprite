@@ -6,11 +6,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [macos-latest]
         build_type: [Release]
         enable_ui: [on]
         include:
-          - os: windows-latest
+          - os: macos-latest
             build_type: Release
             enable_ui: on
     steps:
@@ -21,7 +21,7 @@ jobs:
       uses: hendrikmuhs/ccache-action@v1
       if: runner.os == 'Linux'
       with:
-        key: ${{ matrix.os }}-${{ matrix.enable_ui }}
+        key: ${{ matrix.os }}-${{ matrix.enable_ui }}-${{ matrix.build_type }}
     - uses: seanmiddleditch/gha-setup-ninja@master
     - uses: ilammy/msvc-dev-cmd@v1
       if: runner.os == 'Windows'
